@@ -391,6 +391,17 @@ function generateRickProfile(la) {
     return summaryText;
 }
 
+function highlighText(strings, ...values){
+    let str = "";
+    for(var i = 0; i < strings.length; i++){
+        if(i>0){
+            str += `<b>${values[i-1]}</b>`
+        }
+        str += strings[i];
+    }
+    return str;
+}
+
 function createApplicationId() {
     var result = '';
     var characters = 'ABCDEUVYZabcdrswxyz01789/\\#@$%()*^!';
