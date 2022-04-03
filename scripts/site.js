@@ -77,7 +77,7 @@ function initializeLoans() {
 
 function create_UUID() {
     var dt = new Date().getTime();
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
         var r = (dt + Math.random() * 16) % 16 | 0;
         dt = Math.floor(dt / 16);
         return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
@@ -97,9 +97,9 @@ function bindLoansToDropDown() {
 
 
     for (var i = 0; i < LoanApplicationList.length; i++) {
-        var la = LoanApplicationList[i];
+        let la = LoanApplicationList[i];
 
-        var el = document.createElement("option");
+        let el = document.createElement("option");
         el.textContent = "Application of " + la.ApplicantName;
         el.value = la.Id.toString();
         dropDown.appendChild(el);
@@ -382,7 +382,7 @@ function generateRickProfile(la) {
 
     var applicationCode = String.raw`\t${createApplicationId()}`;
 
-    var summaryText = foo
+    var summaryText = highlighText
         `Dear ${la.ApplicantName}, <br>
     your application for ${"$" + la.LoanAmount}, ${reviewText}.<br>
     Your risk profile is ${riskProfile}.<br>
@@ -393,11 +393,11 @@ function generateRickProfile(la) {
 
 function highlighText(strings, ...values){
     let str = "";
-    for(var i = 0; i < strings.length; i++){
+    for(var i = 0; i < strings.raw.length; i++){
         if(i>0){
             str += `<b>${values[i-1]}</b>`
         }
-        str += strings[i];
+        str += strings.raw[i];
     }
     return str;
 }
@@ -412,17 +412,7 @@ function createApplicationId() {
     return result;
 }
 
-function foo(strings, ...values) {
-    let str = "";
-    for (var i = 0; i < strings.raw.length; i++) {
-        if (i > 0) {
-            str += `<b>${values[i - 1]}</b>`
-        }
-        str += strings.raw[i];
-    }
 
-    return str;
-}
 
 
 
